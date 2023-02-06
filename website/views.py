@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 
 @login_required(login_url='accounts:login')
 def index(request):
+    progresso = 0
     qtd_videos_assistidos = WatchedVideo.objects.filter(user=request.user).count()
     total_videos = Videos.objects.all().count()
 
@@ -35,8 +36,14 @@ def index(request):
 
     cursos_nao_iniciados = ProgressoCurso.objects.filter(user=request.user,progresso=0)
 
+    try:
+        progresso = '{:.2f}'.format((qtd_videos_assistidos/total_videos) * 100)
+    except:
+        pass
+
     context = {
-        'progresso': '{:.2f}'.format((qtd_videos_assistidos/total_videos) * 100),
+
+        'progresso': progresso,
         'cursos': cursos,
         'cursos_andamento': cursos_andamento,
         'cursos_concluidos': cursos_concluidos,
@@ -68,7 +75,7 @@ def config(request):
 
 @login_required(login_url='accounts:login')
 def sessiongamer(request):
-
+    progresso = 0
     videos_assistidos = WatchedVideo.objects.filter(user=request.user).values('title')
     qtd_videos_assistidos = WatchedVideo.objects.filter(user=request.user).count()
     total_videos = Videos.objects.all().count()
@@ -76,10 +83,15 @@ def sessiongamer(request):
     lista_videos = []
     for i in range(qtd_videos_assistidos):
         lista_videos.append(videos_assistidos[i]['title'])
+
+    try:
+        progresso = '{:.2f}'.format((qtd_videos_assistidos/total_videos) * 100)
+    except:
+        pass
    
     context = {
         'videos': lista_videos,
-        'progresso': '{:.2f}'.format((qtd_videos_assistidos/total_videos) * 100)
+        'progresso': progresso
     }
 
     return render(request, 'session_gamer.html', context)
