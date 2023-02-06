@@ -108,7 +108,7 @@ WSGI_APPLICATION = 'estudos.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASE_URL = 'postgresql://postgres:gCvXi1FFXpkxKtmQzd1U@containers-us-west-125.railway.app:7947/railway'
+DATABASE_URL = 'postgresql://postgres:uG5Y5Pj9g9DvsuwWL0Iy@containers-us-west-123.railway.app:7548/railway'
 
 DATABASES = {
     'default': dj_database_url.config(default=DATABASE_URL)
