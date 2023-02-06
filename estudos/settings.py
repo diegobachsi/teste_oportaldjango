@@ -15,6 +15,10 @@ import os
 import dj_database_url
 from decouple import config
 
+from django.db.backends.mysql.base import DatabaseWrapper
+
+DatabaseWrapper.data_types['DateTimeField'] = 'datetime' # fix for MySQL 5.5
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -108,13 +112,25 @@ WSGI_APPLICATION = 'estudos.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASE_URL = 'postgresql://postgres:uG5Y5Pj9g9DvsuwWL0Iy@containers-us-west-123.railway.app:7548/railway'
+'''DATABASE_URL = 'postgresql://postgres:uG5Y5Pj9g9DvsuwWL0Iy@containers-us-west-123.railway.app:7548/railway'
 
 DATABASES = {
     'default': dj_database_url.config(default=DATABASE_URL)
+}'''
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'heroku_e7f5f1e97d6491c',
+        'USER': 'b04b3899b228a0',
+        'PASSWORD': '5150b335',
+        'HOST': 'us-cdbr-east-02.cleardb.com', #or an IP Address that your DB is hosted on
+        'PORT': '3306',
+        'OPTIONS': {
+                'init_command': 'SET default_storage_engine=INNODB',
+            },
+        }
 }
-
-
 
 
 # Password validation
