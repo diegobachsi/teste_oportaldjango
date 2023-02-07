@@ -44,8 +44,8 @@ def details(request, id, slug):
     return render(request, template_name, context)
 
 @login_required(login_url='accounts:login')
-def video_assistido(request, id, title): 
-    video = get_object_or_404(Videos,title=title)
+def video_assistido(request, id, slug): 
+    video = get_object_or_404(Videos,slug=slug)
     videos = Videos.objects.filter(curso=id)
     cursos = Cursos.objects.filter(id=id)
 
@@ -69,11 +69,11 @@ def video_assistido(request, id, title):
         'count': count
     }
 
-    verifica_video_assistido = WatchedVideo.objects.filter(user=request.user, title=video) #realiza consulta no bd para ver se o user current já assistiu o video em questão
+    verifica_video_assistido = WatchedVideo.objects.filter(user=request.user, slug=video) #realiza consulta no bd para ver se o user current já assistiu o video em questão
     if verifica_video_assistido:
         pass
     else:    
-        video_assistido = WatchedVideo(user=request.user, title=video, curso=id)
+        video_assistido = WatchedVideo(user=request.user, slug=video, curso=id)
         video_assistido.save()
 
         qtd_video_por_curso = Videos.objects.filter(curso=id).count()
