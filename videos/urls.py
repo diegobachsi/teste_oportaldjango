@@ -8,5 +8,5 @@ urlpatterns = [
     path('', views.videos, name='index'),
     path('<slug:slug>', views.details, name='details'),
     path('<int:id>/<slug:slug>', views.details, name='details'),
-    path('<int:id>/<title:title>', views.video_assistido, name='video_assistido')
+    path('<int:id>/<title>', views.video_assistido, name='video_assistido')
 ]
