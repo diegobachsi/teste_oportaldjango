@@ -7,5 +7,5 @@ app_name = 'topicos'
 urlpatterns = [
     path('', views.topicos, name='index'),
     path('<slug:slug>', views.details, name='details'),
-    path('<name>', views.title, name='title'),
+    path('<str:name>', views.title, name='title'),
 ]
