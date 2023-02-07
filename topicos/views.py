@@ -23,5 +23,16 @@ def details(request, slug):
     template_name = 'details.html'
     return render(request, template_name, context)
 
+@login_required(login_url='accounts:login')
+def title(request, name):
+    topico = get_object_or_404(Topics,name=name)
+    topicos = Topics.objects.all()
+    context = {
+        'topico': topico,
+        'topicos': topicos
+    }
+    template_name = 'details.html'
+    return render(request, template_name, context)
+
 
 
