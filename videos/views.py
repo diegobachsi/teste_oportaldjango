@@ -44,7 +44,7 @@ def details(request, id, slug):
     return render(request, template_name, context)
 
 @login_required(login_url='accounts:login')
-def video_assistido(request, id, slug): 
+def video_assistido(request, id, slug, id): 
     video = get_object_or_404(Videos,slug=slug)
     videos = Videos.objects.filter(curso=id)
     cursos = Cursos.objects.filter(id=id)
