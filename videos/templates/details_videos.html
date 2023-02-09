@@ -188,7 +188,7 @@
                   'onStateChange': function(event){
                     if (event.data == 0) {
 
-                      window.location.href = "{{ video.title }}?page={{ videos.number }}";
+                      window.location.href = "{{ video.slug }}/{{ video.id }}?page={{ videos.number }}";
                       
                     }
                   }
